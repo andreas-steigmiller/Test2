@@ -1,0 +1,27 @@
+name: Build Releases TEST
+
+# Run this workflow every time a new commit pushed to your repository
+on: [push]
+
+jobs:
+
+
+
+
+  release:
+    name: Draft build release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.url }}
+    steps:
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Readme.md
+          tag_name: Test
+          name: Release Test
+          body: Test
+          draft: true
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
